@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Goodreads Clone</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        .navbar {
+            background-color: #2c3e50;
+        }
+
+        .navbar .navbar-brand, .navbar-nav .nav-link {
+            color: white;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #1abc9c;
+        }
+
+        .hero {
+            background-image: url("img.jpg");
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 60px;
+        }
+
+        .search-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin: 20px auto;
+            width: 80%;
+            text-align: center;
+        }
+
+        .search-input {
+            width: 70%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        .search-button {
+            padding: 10px 20px;
+            background-color: #1abc9c;
+            color: white;
+            border-radius: 5px;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .search-button:hover {
+            background-color: #16a085;
+        }
+
+        .genre-section {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .genre-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            list-style: none;
+            padding: 0;
+        }
+
+        .genre-list li {
+            background: #2c3e50;
+            color: white;
+            padding: 10px 15px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .genre-list li:hover {
+            background: #1abc9c;
+        }
+
+        .book-card {
+            margin: 10px;
+            border: none;
+            width: 18rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .book-card img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            border-radius: 10px;
+        }
+
+        .book-card-body {
+            text-align: center;
+        }
+
+        .book-title {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .book-author {
+            font-size: 16px;
+            color: #7f8c8d;
+        }
+
+        .book-rating {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #f39c12;
+        }
+
+        .book-description {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin-top: 10px;
+        }
+
+        .book-section {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: nowrap;
+            margin: 0 auto;
+            padding: 20px;
+            overflow-x: auto;
+        }
+
+        .footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .footer a {
+            color: #1abc9c;
+            text-decoration: none;
+        }
+
+        .quote-section {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #f8c8d1, #f6a7c1); /* Light pink gradient */
+            margin: 40px 0;
+            border-radius: 15px;
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .quote-section h3 {
+            font-size: 36px;
+            font-weight: bold;
+            color: white;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+        }
+
+        .quote {
+            font-size: 26px;
+            font-style: italic;
+            color: #fff;
+            margin: 20px 0;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1s, transform 1s ease-in-out;
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .quote.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .quote-author {
+            font-size: 20px;
+            color: #fff;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .search-input {
+                width: 80%;
+            }
+
+            .search-button {
+                width: 100%;
+                margin-top: 10px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 40px;
+            }
+
+            .book-card {
+                width: 100%;
+            }
+
+            .book-section {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="#">Booknest</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+                <li class="nav-item"><a class="nav-link btn btn-light text-danger px-3 mx-2" href="{{ url_for('register') }}">Register</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Groups</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Account</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <h1>Discover Your Next Favorite Book</h1>
+        <p>Join a community of readers and explore millions of books.</p>
+    </div>
+
+    <div class="container search-container">
+        <h3>Search and Browse Books</h3>
+        <input type="text" class="search-input" id="searchInput" placeholder="Title / Author / ISBN">
+        <button type="button" class="search-button" id="searchButton">Search</button>
+    </div>
+
+    <div class="container genre-section">
+        <h4>Browse by Genre</h4>
+        <ul class="genre-list">
+            <li>Art</li><li>Biography</li><li>Business</li><li>Children's</li><li>Christian</li>
+            <li>Classics</li><li>Comics</li><li>Cookbooks</li><li>Ebooks</li><li>Fantasy</li>
+        </ul>
+    </div>
+
+    <div class="container book-section">
+        <div class="card book-card">
+            <img src="book2.jpg" class="card-img-top" alt="book cover">
+            <div class="card-body book-card-body">
+                <h5 class="book-title">The Psychology of money</h5>
+                <p class="book-author">Morgan Housel</p>
+                <p class="book-rating">⭐⭐⭐⭐⭐</p>
+                <p class="book-description">The Psychology of Money is a collection of short stories exploring the strange ways people think about money. The author presents related biases, flaws, behaviors, and attitudes that affect one's financial outcomes and shows how one's psychology can work for and against them.</p>
+            </div>
+        </div>
+
+        <div class="card book-card">
+            <img src="book1.jpg" class="card-img-top" alt="book cover">
+            <div class="card-body book-card-body">
+                <h5 class="book-title">Atomic Habits</h5>
+                <p class="book-author">James Clear</p>
+                <p class="book-rating">⭐⭐⭐⭐</p>
+                <p class="book-description">Atomic Habits by James Clear is a book that talks about the power of small habits in creating lasting changes in your life. Unlike generic and repetitive motivational books, this book tells you that real change comes from countless small decisions, not just motivation.</p>
+            </div>
+        </div>
+
+        <div class="card book-card">
+            <img src="colleen.jpg" class="card-img-top" alt="book cover">
+            <div class="card-body book-card-body">
+                <h5 class="book-title">It Ends With Us </h5>
+                <p class="book-author">Colleen Hoover </p>
+                <p class="book-rating">⭐⭐⭐⭐⭐</p>
+                <p class="book-description">It Ends with Us is a romance novel by Colleen Hoover, published by Atria Books on August 2, 2016. Based on the relationship between her mother and father, Hoover described it as "the hardest book I've ever written". It explores themes of domestic violence and emotional abuse.</p>
+            </div>
+        </div>
+
+        <div class="card book-card">
+            <img src="book4.jpg" class="card-img-top" alt="book cover">
+            <div class="card-body book-card-body">
+                <h5 class="book-title">The Lost City of Z</h5>
+                <p class="book-author">David Grann</p>
+                <p class="book-rating">⭐⭐⭐⭐</p>
+                <p class="book-description">This book recounts the activities of the British explorer Percy Fawcett who, in 1925, disappeared with his son in the Amazon rainforest while looking for the ancient "Lost City of Z".</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Famous Book Quotes Section -->
+    <div class="quote-section">
+        <h3>Famous Book Quotes</h3>
+        <div class="quote">"The only way out of the labyrinth of suffering is to forgive." <span class="quote-author">- John Green, Looking for Alaska</span></div>
+        <div class="quote">"It does not matter how slow you go as long as you do not stop." <span class="quote-author">- Confucius</span></div>
+        <div class="quote">"Not all those who wander are lost." <span class="quote-author">- J.R.R. Tolkien, The Lord of the Rings</span></div>
+        <div class="quote">"We are all in the gutter, but some of us are looking at the stars." <span class="quote-author">- Oscar Wilde</span></div>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2025 Booknest</p>
+        <p><a href="#">Privacy</a> | <a href="#">Terms</a></p>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(window).on('scroll', function() {
+            $('.quote').each(function() {
+                var elementTop = $(this).offset().top;
+                var windowTop = $(window).scrollTop() + $(window).height();
+
+                if (windowTop > elementTop) {
+                    $(this).addClass('visible');
+                }
+            });
+        });
+
+    // Search Button Click Event
+    $('#searchButton').on('click', function() {
+    var query = $('#searchInput').val();
+    if(query) {
+        // Redirect to app3.html with the query as a URL parameter
+        window.location.href = "app3.html?search=" + encodeURIComponent(query);
+    }
+});
+
+    
+
+    
+
+    </script>
+
+</body>
+</html>

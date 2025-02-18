@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authors and Books</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        .navbar {
+            background-color: #2c3e50;
+        }
+
+        .navbar .navbar-brand, .navbar-nav .nav-link {
+            color: white;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #1abc9c;
+        }
+
+        .hero {
+            background-image: url("img.jpg");
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 60px;
+        }
+
+        .author-section {
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        .author-card {
+            margin: 20px;
+            border: none;
+            width: 18rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .author-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .author-card img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            border-radius: 10px;
+        }
+
+        .author-card-body {
+            text-align: center;
+            padding: 15px;
+        }
+
+        .author-name {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .book-title {
+            font-size: 16px;
+            color: #7f8c8d;
+        }
+
+        .footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .footer a {
+            color: #1abc9c;
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .author-card {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="#">Booknest</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Browse</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Authors</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Account</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <h1>Meet the Authors</h1>
+        <p>Explore books from your favorite authors and discover new ones!</p>
+    </div>
+
+    <div class="container author-section">
+        <h2>Featured Authors</h2>
+        <div class="row">
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="card author-card">
+                    <img src="james.jpg" alt="Author Image">
+                    <div class="card-body author-card-body">
+                        <h5 class="author-name">James Clear</h5>
+                        <p class="book-title">Author of "Atomic Habits"</p>
+                        <a href="author-page.html?author=James%20Clear" class="btn btn-info">View Books</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="card author-card">
+                    <img src="morgon.jpg" alt="Author Image">
+                    <div class="card-body author-card-body">
+                        <h5 class="author-name">Colleen Hoover</h5>
+                        <p class="book-title">Author of "It Ends with Us"</p>
+                        <a href="author-page.html?author=Colleen%20Hoover" class="btn btn-info">View Books</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="card author-card">
+                    <img src="morgon.jpg" alt="Author Image">
+                    <div class="card-body author-card-body">
+                        <h5 class="author-name">Morgan Housel</h5>
+                        <p class="book-title">Author of "The Psychology of Money"</p>
+                        <a href="author-page.html?author=Morgan%20Housel" class="btn btn-info">View Books</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="card author-card">
+                    <img src="jrr.jpg" alt="Author Image">
+                    <div class="card-body author-card-body">
+                        <h5 class="author-name">J.R.R. Tolkien</h5>
+                        <p class="book-title">Author of "The Lord of the Rings"</p>
+                        <a href="author-page.html?author=J.R.R.%20Tolkien" class="btn btn-info">View Books</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="card author-card">
+                    <img src="oscar.jpg" alt="Author Image">
+                    <div class="card-body author-card-body">
+                        <h5 class="author-name">Oscar Wilde</h5>
+                        <p class="book-title">Author of "The Picture of Dorian Gray"</p>
+                        <a href="author-page.html?author=Oscar%20Wilde" class="btn btn-info">View Books</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="card author-card">
+                    <img src="john.jpg" alt="Author Image">
+                    <div class="card-body author-card-body">
+                        <h5 class="author-name">John Green</h5>
+                        <p class="book-title">Author of "The Fault in Our Stars"</p>
+                        <a href="author-page.html?author=John%20Green" class="btn btn-info">View Books</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2025 Booknest</p>
+        <p><a href="#">Privacy</a> | <a href="#">Terms</a></p>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    
+</body>
+</html>

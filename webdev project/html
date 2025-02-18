@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Goodreads Clone</title>
+    <!-- Add Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .navbar {
+            background: #007bff;
+            padding: 15px;
+            color: white;
+            font-size: 20px;
+            animation: slideIn 1s ease-out;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        h1, h2 {
+            color: #444;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        input[type="text"], input[type="password"] {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+
+        .book-list {
+            text-align: left;
+            margin-top: 20px;
+        }
+
+        .book {
+            background: #e9ecef;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .book img {
+            width: 50px;
+            height: 75px;
+            margin-right: 15px;
+            border-radius: 5px;
+        }
+
+        /* Animation Keyframes */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(-100%); }
+            to { transform: translateX(0); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="navbar text-center">Goodreads Clone</div>
+    
+    <!-- Login Container -->
+    <div class="container" id="login-container">
+        <h1 class="text-center">Login</h1>
+        <input type="text" id="username" class="form-control mb-3" placeholder="Username"><br>
+        <input type="password" id="password" class="form-control mb-3" placeholder="Password"><br>
+        <button class="btn btn-primary btn-block" onclick="login()">Login</button>
+        <p class="error" id="errorMessage"></p>
+    </div>
+    
+    <!-- Home Container -->
+    <div class="container" id="home-container" style="display: none;">
+        <h1 class="text-center">Welcome to Goodreads Clone</h1>
+        <div class="input-group mb-3">
+            <input type="text" id="bookInput" class="form-control" placeholder="Enter book title...">
+            <div class="input-group-append">
+                <button class="btn btn-primary" onclick="addBook()">Add Book</button>
+            </div>
+        </div>
+        <h2>Your Reading List</h2>
+        <div id="bookList" class="book-list"></div>
+    </div>
+
+    <!-- Add Bootstrap JS (Optional for more interactivity) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        function login() {
+            let username = document.getElementById('username').value;
+            let password = document.getElementById('password').value;
+            let errorMessage = document.getElementById('errorMessage');
+            
+            if (username === "admin" && password === "password") {
+                document.getElementById('login-container').style.display = 'none';
+                document.getElementById('home-container').style.display = 'block';
+            } else {
+                errorMessage.textContent = "Invalid username or password";
+            }
+        }
+
+        function addBook() {
+            let bookTitle = document.getElementById('bookInput').value;
+            if (bookTitle.trim() === "") {
+                alert("Please enter a book title.");
+                return;
+            }
+
+            let bookList = document.getElementById('bookList');
+            let bookItem = document.createElement('div');
+            bookItem.className = 'book';
+            bookItem.innerHTML = `
+                <img src="https://via.placeholder.com/50x75" alt="book cover">
+                <span>${bookTitle}</span>
+            `;
+            bookList.appendChild(bookItem);
+
+            document.getElementById('bookInput').value = "";
+        }
+    </script>
+</body>
+</html>
+
+
